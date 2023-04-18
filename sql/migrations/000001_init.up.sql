@@ -15,7 +15,7 @@ CREATE TABLE
         stop VARCHAR(20) NOT NULL,
         max_tokens SMALLINT NOT NULL,
         presence_penalty DECIMAL(3, 2) NOT NULL,
-        frenquency_penalty DECIMAL(3, 2) NOT NULL,
+        frequency_penalty DECIMAL(3, 2) NOT NULL,
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL
     );

@@ -7,11 +7,94 @@ package db
 
 import (
 	"context"
+	"time"
 )
+
+const createChat = `-- name: CreateChat :exec
+
+INSERT INTO
+    chats (
+        id,
+        user_id,
+        initial_message_id,
+        status,
+        token_usage,
+        model,
+        model_max_tokens,
+        temperature,
+        top_p,
+        n,
+        stop,
+        max_tokens,
+        presence_penalty,
+        frequency_penalty,
+        created_at,
+        updated_at
+    )
+VALUES (
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?,
+        ?
+    )
+`
+
+type CreateChatParams struct {
+	ID               string
+	UserID           string
+	InitialMessageID string
+	Status           string
+	TokenUsage       int32
+	Model            string
+	ModelMaxTokens   int32
+	Temperature      float64
+	TopP             float64
+	N                int32
+	Stop             string
+	MaxTokens        int32
+	PresencePenalty  float64
+	FrequencyPenalty float64
+	CreatedAt        time.Time
+	UpdatedAt        time.Time
+}
+
+func (q *Queries) CreateChat(ctx context.Context, arg CreateChatParams) error {
+	_, err := q.db.ExecContext(ctx, createChat,
+		arg.ID,
+		arg.UserID,
+		arg.InitialMessageID,
+		arg.Status,
+		arg.TokenUsage,
+		arg.Model,
+		arg.ModelMaxTokens,
+		arg.Temperature,
+		arg.TopP,
+		arg.N,
+		arg.Stop,
+		arg.MaxTokens,
+		arg.PresencePenalty,
+		arg.FrequencyPenalty,
+		arg.CreatedAt,
+		arg.UpdatedAt,
+	)
+	return err
+}
 
 const findChatByID = `-- name: FindChatByID :one
 
-SELECT id, user_id, initial_message_id, status, token_usage, model, model_max_tokens, temperature, top_p, n, stop, max_tokens, presence_penalty, frenquency_penalty, created_at, updated_at FROM chats WHERE id = ?
+SELECT id, user_id, initial_message_id, status, token_usage, model, model_max_tokens, temperature, top_p, n, stop, max_tokens, presence_penalty, frequency_penalty, created_at, updated_at FROM chats WHERE id = ?
 `
 
 func (q *Queries) FindChatByID(ctx context.Context, id string) (Chat, error) {
@@ -31,7 +114,7 @@ func (q *Queries) FindChatByID(ctx context.Context, id string) (Chat, error) {
 		&i.Stop,
 		&i.MaxTokens,
 		&i.PresencePenalty,
-		&i.FrenquencyPenalty,
+		&i.FrequencyPenalty,
 		&i.CreatedAt,
 		&i.UpdatedAt,
 	)

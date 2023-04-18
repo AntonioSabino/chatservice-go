@@ -9,22 +9,22 @@ import (
 )
 
 type Chat struct {
-	ID                string
-	UserID            string
-	InitialMessageID  string
-	Status            string
-	TokenUsage        int32
-	Model             string
-	ModelMaxTokens    int32
-	Temperature       float64
-	TopP              float64
-	N                 int32
-	Stop              string
-	MaxTokens         int32
-	PresencePenalty   float64
-	FrenquencyPenalty float64
-	CreatedAt         time.Time
-	UpdatedAt         time.Time
+	ID               string
+	UserID           string
+	InitialMessageID string
+	Status           string
+	TokenUsage       int32
+	Model            string
+	ModelMaxTokens   int32
+	Temperature      float64
+	TopP             float64
+	N                int32
+	Stop             string
+	MaxTokens        int32
+	PresencePenalty  float64
+	FrequencyPenalty float64
+	CreatedAt        time.Time
+	UpdatedAt        time.Time
 }
 
 type Message struct {

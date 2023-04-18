@@ -64,3 +64,10 @@ SELECT *
 FROM messages
 WHERE erased = 0 and chat_id = ?
 order by order_msg asc;
+
+-- name: FindErasedMessagesByChatID :many
+
+SELECT *
+FROM messages
+WHERE erased = 1 and chat_id = ?
+order by order_msg asc;

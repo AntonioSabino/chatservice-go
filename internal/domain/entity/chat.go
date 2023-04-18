@@ -22,7 +22,7 @@ type Chat struct {
 	UserID               string
 	InitialSystemMessage *Message
 	Messages             []*Message
-	EresadMessages       []*Message
+	ErasedMessages       []*Message
 	Status               string
 	TokenUsage           int
 	Config               *ChatConfig
@@ -72,7 +72,7 @@ func (c *Chat) AddMessage(m *Message) error {
 			c.RefreshTokenUsage()
 			break
 		} else {
-			c.EresadMessages = append(c.EresadMessages, c.Messages[0])
+			c.ErasedMessages = append(c.ErasedMessages, c.Messages[0])
 			c.Messages = c.Messages[1:]
 			c.RefreshTokenUsage()
 		}

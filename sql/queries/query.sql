@@ -52,9 +52,15 @@ INSERT INTO
         order_msg,
         created_at
     )
-VALUES
-(?, ?, ?, ?, ?, ?, ?, ?, ?);
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 -- name: FindChatByID :one
 
 SELECT * FROM chats WHERE id = ?;
+
+-- name: FindMessagesByChatID :many
+
+SELECT *
+FROM messages
+WHERE erased = 0 and chat_id = ?
+order by order_msg asc;

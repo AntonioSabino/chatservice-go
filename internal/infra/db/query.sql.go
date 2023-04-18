@@ -146,6 +146,16 @@ func (q *Queries) DeleteChatMessages(ctx context.Context, chatID string) error {
 	return err
 }
 
+const deleteErasedChatMessages = `-- name: DeleteErasedChatMessages :exec
+
+DELETE FROM messages WHERE erased=1 and chat_id = ?
+`
+
+func (q *Queries) DeleteErasedChatMessages(ctx context.Context, chatID string) error {
+	_, err := q.db.ExecContext(ctx, deleteErasedChatMessages, chatID)
+	return err
+}
+
 const findChatByID = `-- name: FindChatByID :one
 
 SELECT id, user_id, initial_message_id, status, token_usage, model, model_max_tokens, temperature, top_p, n, stop, max_tokens, presence_penalty, frequency_penalty, created_at, updated_at FROM chats WHERE id = ?

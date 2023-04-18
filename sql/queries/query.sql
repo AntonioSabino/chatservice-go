@@ -95,3 +95,7 @@ WHERE id = ?;
 -- name: DeleteChatMessages :exec
 
 DELETE FROM messages WHERE chat_id = ?;
+
+-- name: DeleteErasedChatMessages :exec
+
+DELETE FROM messages WHERE erased=1 and chat_id = ?;

@@ -10,6 +10,51 @@ import (
 	"time"
 )
 
+const addMessage = `-- name: AddMessage :exec
+
+INSERT INTO
+    messages (
+        id,
+        chat_id,
+        role,
+        content,
+        tokens,
+        model,
+        erased,
+        order_msg,
+        created_at
+    )
+VALUES
+(?, ?, ?, ?, ?, ?, ?, ?, ?)
+`
+
+type AddMessageParams struct {
+	ID        string
+	ChatID    string
+	Role      string
+	Content   string
+	Tokens    int32
+	Model     string
+	Erased    bool
+	OrderMsg  int32
+	CreatedAt time.Time
+}
+
+func (q *Queries) AddMessage(ctx context.Context, arg AddMessageParams) error {
+	_, err := q.db.ExecContext(ctx, addMessage,
+		arg.ID,
+		arg.ChatID,
+		arg.Role,
+		arg.Content,
+		arg.Tokens,
+		arg.Model,
+		arg.Erased,
+		arg.OrderMsg,
+		arg.CreatedAt,
+	)
+	return err
+}
+
 const createChat = `-- name: CreateChat :exec
 
 INSERT INTO

@@ -38,6 +38,23 @@ VALUES (
         ?
     );
 
+-- name: AddMessage :exec
+
+INSERT INTO
+    messages (
+        id,
+        chat_id,
+        role,
+        content,
+        tokens,
+        model,
+        erased,
+        order_msg,
+        created_at
+    )
+VALUES
+(?, ?, ?, ?, ?, ?, ?, ?, ?);
+
 -- name: FindChatByID :one
 
 SELECT * FROM chats WHERE id = ?;

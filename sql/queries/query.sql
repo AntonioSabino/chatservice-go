@@ -91,3 +91,7 @@ SET
     frequency_penalty = ?,
     updated_at = ?
 WHERE id = ?;
+
+-- name: DeleteChatMessages :exec
+
+DELETE FROM messages WHERE chat_id = ?;

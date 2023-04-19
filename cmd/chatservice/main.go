@@ -6,9 +6,9 @@ import (
 
 	"github.com/AntonioSabino/fclx/chatservice/configs"
 	"github.com/AntonioSabino/fclx/chatservice/internal/infra/repository"
+	"github.com/AntonioSabino/fclx/chatservice/internal/infra/web"
+	"github.com/AntonioSabino/fclx/chatservice/internal/infra/web/webserver"
 	"github.com/AntonioSabino/fclx/chatservice/internal/usecase/chatcompletion"
-	"github.com/AntonioSabino/fclx/chatservice/internal/web"
-	"github.com/AntonioSabino/fclx/chatservice/internal/web/webserver"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/sashabaranov/go-openai"

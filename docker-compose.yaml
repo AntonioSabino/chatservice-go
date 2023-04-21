@@ -19,6 +19,6 @@ services:
       MYSQL_DATABASE: chat_test
       MYSQL_PASSWORD: root
     ports:
-      - 3306:3306  
+      - 3310:3306
     volumes:
       - .docker/mysql:/var/lib/mysql
